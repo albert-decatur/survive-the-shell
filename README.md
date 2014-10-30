@@ -30,6 +30,8 @@ Anything after a comment is not executed by the shell.
 Remember, your shell is Bash!
 You'll notice them in the utils section above.
 
+##hidden stuff
+
 ##command flags ("options")
 Flags allow the user to turn on and off various util options, or to point utils to inputs and name outputs.
 
@@ -41,6 +43,8 @@ du -h myfile.txt
 # tell me how much free memory the system has *using gigabytes*
 free -g
 ```
+
+##man pages and the -h flag
 
 ##Pipes
 
