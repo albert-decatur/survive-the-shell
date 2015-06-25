@@ -1,20 +1,12 @@
 survive the shell
 ====================
 
-Bash is a programming language for getting stuff done stupid fast.
-
-It's not for software development, but it can save your life.
-
-With bash, you run utilities to do stuff.
-
-You can send the output of one utility to become the input of the next utility using **pipes**.
-
-You can feed files to utilities and redirect the output of utilities to files.
-
-You now know the essence of Bash.
-
-
-
+Bash is a programming language for getting stuff done stupid fast.  
+It's not for software development, but it can save your life.  
+With bash, you run utilities to do stuff.  
+You can send the output of one utility to become the input of the next utility using **pipes**.  
+You can feed files to utilities and redirect the output of utilities to files.  
+You now know the essence of Bash.  
 
 ##utils
 
