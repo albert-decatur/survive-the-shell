@@ -33,7 +33,7 @@ If you're a Mac user, try [homebrew](http://brew.sh/) as your package manager.
 
 ## simple tricks to help you survive the shell
 
-Note there here, "^" means "hit control", and "+" means "then hit . . .".
+Note that here, "^" means "hit control", and "+" means "then hit . . .".
 
 1. when you want to cancel something hit ^+c
 1. when you want to exit a terminal, hit ^+d or type exit
@@ -82,7 +82,7 @@ ls -a
 One thing you'll notice when you "ls -a" are these weird directories called "." and "..".  
 Those are "current directory" and "directory above current directory".  
 Note that when you "ls" it's really equivalent to "ls .".  
-This is true of many commands because typically you execute commands in stuff in the "working directory".  
+This is true of many commands because typically you execute commands on stuff in the "working directory".  
 
 ##command flags ("options")
 Flags allow the user to turn on and off various util options, or to point utils to inputs and name outputs.
@@ -184,10 +184,10 @@ while read line; do echo $line HEY; done < foo
 
 Output should be
 
-this HEY
-is HEY
-some HEY
-text HEY
+this HEY  
+is HEY  
+some HEY  
+text HEY  
 
 
 ## append
@@ -208,6 +208,13 @@ for i in 1 2 3; do echo $i >> foo; done
 cat foo
 ```
 
+Should look like
+
+bar  
+1  
+2  
+3  
+
 ##sed, awk, grep
 
 Sed, awk, and grep are super helpful utilities.
@@ -220,13 +227,70 @@ You can use them this way:
 
 ## text editors
 ... are your friend.
-They let you write configure files that control how utilities run.
+You need them to write text files, which are kind in \*NIX land.
+For example, configuration files that determine how programs run, or scripts that do tasks for you.
+
+The best text editor ever made is . . . a matter of heated debate!
+I like vim.
+Here's a [game](http://vim-adventures.com/) to help you learn it!
+
+Vim is a **modal** text editor which means it has multiple modes.
+It's important to always know which mode you're in.
+Good luck!
+
+To open a file with vim just
+
+```bash
+# let's make a bogus file with redirection
+echo "some text" > foo
+# open that file with vim
+vim foo
+```
+
+To simply exit vim type ":q", which means "quit".
+To save and exit, type ":wq", which means "write to file and quit".
+The colon lets you enter commands when you're in command mode, which is the default.
+Hit "i" to enter insert mode, which is what you're used to for entering text.
+Hit escape to leave insert mode and go back to command mode.
+
+Or you could just use any old graphical text editor for now.
+That's cool too.
+
+## configuration files
+
+Often called "config" files, these text files control the behavior of programs like web servers or even small utilities.
 Configuration files have names like these:
 
 * ~/.bashrc
+  * controls how your bash session works
 * ~/.vimrc
-* ~/.config/surfraw/conf
+  * controls how the text editor vim works
+* /usr/share/postgresql/9.3/pg_hba.conf
+  * controls how postgreSQL 9.3 works
+* /etc/ssh/sshd_config
+  * controls how OpenSSH server works
 
+Sometimes you'll see the suffix "rc" which stands for "run commands".  
+Other times the file will just be named "config" or "foo_config" or "foo.conf".   
+Config files don't make changes to a program's behavior immediately.
+You have to restart the program the config file controls to let those changes get loaded up.
+For example, if you change your ~/.bashrc you can either start a new terminal or you could 
+
+```bash
+source ~/.bashrc
+```
+
+And if you change your postgreSQL config you can
+
+```bash
+service postgresql restart
+```
+
+As you can see, there is no single way
+
+* that config files are named
+* where config files live in the directory hierarchy
+* or how to restart a program whose config file you just changed 
 
 ##script writing
 Just add a shebang!
@@ -288,6 +352,9 @@ One public key per line!
 
 
 ##bash tricks
+
+1. double quote a variable to preserve whitespace
+  1. this is crucial for stuff like a TSV!
 
 ###tab completion
 
@@ -490,7 +557,7 @@ directory|just a "folder" from Windows speak
 word|meaning
 ---|---
 hack|a quick but often fragile solution to a problem
-munging, to munge|acrobatic data manipulation
+munging, to munge, sometimes "wrangling"|acrobatic data manipulation
 grok|to understand truly and deeply
 RTFM|a suggestion to consult existing help, literally Read the F\*\*\*ing Manual
 NB|nota bene - meaning "pay careful attention to the following"
