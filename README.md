@@ -541,7 +541,7 @@ field|column
 record|row
 record separator|the character that distinguishes units of analysis from each other, usually newline ( "rows" of data )
 field separator|the character that distinguishes attributes of a unit of analysis, usually comma (CSV) or tab (TSV)
-*plain* text|text you can read from the terminal ( *not* Word docs! ). Note that because of character encoding there's really no such thing as *plain* text
+plain text|text you can read from the terminal ( *not* Word docs! ). Note that because of character encoding there's really no such thing as *plain* text
 character encoding|set of systems used to turn computer stuff (bits) into "plain" text (letters, numbers, etc)
 carriage return|mostly harmless character that sometimes gets used in excel exports instead of line feeds (proper UNIX style newlines)
 line feed|in UNIX style, the classic record separator usually associated with the 'Enter' key
