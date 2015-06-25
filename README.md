@@ -1,36 +1,40 @@
-Do-ers Guide to Bash
+survive the shell
 ====================
 
-Do-ers are people who get things **done**.
-Here's how to be a do-er with Bash.
+Bash is a programming language for getting stuff done stupid fast.
 
-Bash is a programming language.
-Bash is a glue language.
-Glue holds stuff together.
-Utilities do stuff to inputs and spit out outputs.
-You can send the output of one utility to become the input of another using pipes.
-When you're piping you get stuff done **fast**.
-When you're done piping you can redirect to file.
+It's not for software development, but it can save your life.
+
+With bash, you run utilities to do stuff.
+
+You can send the output of one utility to become the input of the next utility using **pipes**.
+
+You can feed files to utilities and redirect the output of utilities to files.
+
 You now know the essence of Bash.
 
+
+
+
 ##utils
-Utilities ("utils") are commands that get stuff done.
-```bash
-# list files
-ls
-# tell me how big a certain file is
-du myfile.txt
-# tell me how much free memory the system has
-free
-```
+
+
+## simple tricks to help you survive the shell
+
+Note there here, "^" means "hit control", and "+" means "then hit . . .".
+
+1. when you want to cancel something hit ^+c
+1. when you want to exit a terminal, hit ^+d or type exit
+1. when you want to exit a program that you can't seem to exit
+  1. just type "q".  works for the pager "less"
+  1. type ":q" if you're in the text editor vim
+  1. type "\q" if you're in a SQL shell
+1. when everything is totally **borked** - meaning there's a total **snafu** - just type "reset".  Should set your terminal back on the right path.
+
 
 ##comments
-Comments start with a pound ("#").
-Anything after a comment is not executed by the shell.
-Remember, your shell is Bash!
-You'll notice them in the utils section above.
 
-##hidden stuff
+##hidden files and directories
 
 ##command flags ("options")
 Flags allow the user to turn on and off various util options, or to point utils to inputs and name outputs.
@@ -46,10 +50,68 @@ free -g
 
 ##man pages and the -h flag
 
-##Pipes
+Always remember to Read the F\*\*\*ing Manual (RTFM)!
+You can access a command's manual using the man command.
+Like this!
+
+```bash
+man ls
+```
+
+Don't panic!
+Just hit "q" to quit this view.
+It's actually just an instance of the pager "less".
+Pagers are really important!
+
+Many newer commands don't have a manual you can access with "man".
+These usually let you use a flag like --help or -h.
+For example . . .
+
+```bash
+cd -h
+# or
+cd --help
+```
+
+##pagers
+
+Pagers let you see one **page** of text on your terminal at a time.
+This is crucial because outputs of commands could potentially be millions of lines long, or even infinite!
+One great pager is "less", which uses these keybindings:
+
+* q to quit
+* gg to go to top
+* G to go to bottom
+* / to start a search
+* when doing a search, n to go to next entry
+* when doing a search, N to go to previous entry
+
+Because you've been so good, here's a fun example of an infinite output.
+Just replace "foo" with anything you want:
+
+```bash
+yes foo
+```
+
+Hit control and then c to cancel!!
+Otherwise it will go on indefinitely.
+
+##pipes
+
+Bash is all about utils and pipes.
+Utils each do one thing well.
+Pipes pass the output of one util to become the inpput of the next utils.
+
+It looks like this . . .
+
+```bash
+
+```
 
 
-##Redirection
+##redirection
+
+
 
 ##sed, awk, grep
 
@@ -60,14 +122,46 @@ You can use them this way:
 * awk handles tables
 * grep pulls out records according to a pattern
 
-##vim 
-Vim is a text editor.
-It's really good.
-It has two modes.
+
+## text editors
+... are your friend.
+They let you write configure files that control how utilities run.
+Configuration files have names like these:
+
+* ~/.bashrc
+* ~/.vimrc
+* ~/.config/surfraw/conf
+
 
 ##script writing
 Just add a shebang!
-###shebang line
+Here's how . . . 
+Write this into a text file called "foo.sh".
+Note the Windows users: file extensions are basically just a clue to people and computers about what the file **might** contain.  They don't actually dictate what's in a file, and could actually be anything.
+```bash
+#!/bin/bash
+
+ls
+```
+That first line is called a *shebang* or *crunchbang*.
+You use it for other programming languages too, like you might use this for ruby: "#!/usr/bin/env ruby".
+Now make your text file into an executable script with this . . .
+```bash
+chmod +x foo.sh
+```
+And run it like this!
+```bash
+./foo.sh
+# or this, but you don't need to mention bash since the crunchbang line mentions it
+bash foo.sh
+```
+Of course, all it does is run the commands you wrote in the text file foo.sh in the order you wrote them, exactly as if you pasted them into the command line.
+But scripts have some serious advantages over running commands at the command line:
+
+* user arguments
+  * positional parameters or flags
+* can be called by **other** programs, for example cron
+
 
 ##ssh 
 ###key encryption
@@ -99,9 +193,44 @@ One public key per line!
 
 
 ##bash tricks
+
 ###tab completion
+
+When you're in the bash shell and don't know what you might want to type next just hit TAB once or twice.
+Go ahead.
+Give it a try!
+If you type nothing and hit tab twice, bash will just tell you every command in your PATH.
+That's because you always start by entering a command's name, followed by its parameters.
+
+### PATH
+
+Go ahead and 
+
+```bash
+echo $PATH
+```
+
+Note that the list you get back is colon separated - each colon means a new directory is about to be mentioned.
+You PATH is just a list of diredctories that hold executables you can use from anyplace.
+For example, if you
+
+```bash
+ls /bin/
+```
+
+you get back a list of executables kept under the directory /bin/.
+
+
+### \*NIX directory structure
+
+\*NIX is just a cutesy way of saying "anything like UNIX", like Linux.
+It uses wildcards, which are just special characters for pattern matching.
+\*NIX systems - like Mac OS X - have a folder hierarchy that starts with "/" at the top.
+Everything is under "/", including attached devices like network drives and USB sticks!
+Look for those external devices under "/media/".
+Look for users' folders under "/home/".
+
 ###reverse search
-###file extensions are meaningless
 ###find
 ###grep -r
 
@@ -119,7 +248,7 @@ EOF
 ##exit status
 The exit status of a command tells you whether it succeeded, or if it failed how it failed.
 An exit status of "0" is all good.
-Anything else is bad!
+Anything else signals an error and demands your attention!
 
 ## ~/.bashrc
 Your Bash "run commands" file contains instructions that are run each time you log into Bash.
@@ -146,7 +275,7 @@ screen -r
 ```
 
 Check out these commands to control screen once you're in a session:
-(Note that "^" means hitting the control key)
+(Note that "^" means hitting the control key and "+" means hitting the next key real fast)
 
 * ^a+c
   * "create" a new terminal window
@@ -156,6 +285,10 @@ Check out these commands to control screen once you're in a session:
   * go to the "previous" terminal window
 * ^d
   * exit this terminal window
+* ^a+K
+  * kill the current window and everything in it - when things get out of control!
+
+There are lots of alternatives to GNU screen, like [tmux](http://tmux.github.io/).
 
 
 ##regular expressions ("regex")
@@ -170,14 +303,28 @@ It's powerful but dangerous and cryptic.
 Examples:
 
 ```bash
-grep -E "^start"
-grep -E "end$"
-grep -E "\bwhole\b \bwords\b"
-grep -E "[^(not this)]"
-grep -E "[0-9]+"
-grep -E "[0-9]{,2}"
-grep -E "[0-9.-]{,2}"
-grep -E "[A-Za-z0-9.-]{,2}"
+# note that the -E flag for grep isn't strictly needed in each case but it doesn't hurt
+echo "start is the word that starts this line" | grep -E "^start"
+echo "end is the word at this line's end" | grep -E "end$"
+echo "these words must be whole but can appear in any word order" | grep -E "\bwhole\b|\bwords\b"
+echo "period matches any one character, except in brackets which means real period." | grep -E ".[.]"
+echo "does this match everything but the question mark?" | grep -E "[^?]"
+echo "this matches numbers like 90 and 4, but see how the decimal doesn't match in 4.1?" | grep -E "[0-9]+"
+echo "this matches numbers like 4.1 and -4.1" | grep -E "[0-9.-]+"
+echo "this only properly matches two digit numbers like 10 and not 110 or 1" | grep -E "[0-9]{2}"
+echo "this matches everything in this string but 6 but do you know why?" | grep -E "[A-Za-z0-9.?-]{2,}"
+```
+
+No lesson on regex is complete without URL matching examples!
+
+```bash
+# first get some results from duckduckgo
+curl -s "https://duckduckgo.com/html/?q=foo" |\
+# then grab just strings that look like URLs.
+# in this case, we're looking for "http://" at the beginning and then "." and then something three characters long.
+# this definitely does not match all URLs.
+# note grep's -o flag means keep only match
+grep -oE "http://.*[.][a-z]{3}"
 ```
 
 ##other shells
@@ -185,14 +332,13 @@ Bash is the default shell on most Linux/Mac systems, but
 there are lots of shells besides Bash.
 Some other shells include:
 
-* sh
-  * the basic shell
 * dash
   * simpler than Bash
-* zsh
 * csh
   * C language inspired shell
 * ksh
+* zsh
+  * great tab autocompletion, endless features
 
 ##glossary
 word|meaning
@@ -202,13 +348,20 @@ field|column
 record|row
 record separator|the character that distinguishes units of analysis from each other, usually newline ( "rows" of data )
 field separator|the character that distinguishes attributes of a unit of analysis, usually comma (CSV) or tab (TSV)
-"plain" text|text you can read from the terminal ( *not* Word docs! )
+*plain* text|text you can read from the terminal ( *not* Word docs! ). Note that because of character encoding there's really no such thing as *plain* text
 character encoding|set of systems used to turn computer stuff (bits) into "plain" text (letters, numbers, etc)
-carriage return|pesky character sometimes used as a record separator. Don't use it!
-newline|the classic record separator usually associated with the 'Enter' key
-ASCII|classic simple character encoding really only good for English
-UTF-8|awesome modern character encoding good for everything
-utils|commands ("utilities") that do one job and do it well
-pipes|tool to send the output of one command to become the input of the next command (written like this: |)
+carriage return|mostly harmless character that sometimes gets used in excel exports instead of line feeds (proper UNIX style newlines)
+line feed|in UNIX style, the classic record separator usually associated with the 'Enter' key
+ASCII|classic simple character encoding really only good for English language
+UTF-8|awesome modern character encoding good for every language
+utils|commands (**utilities**) that do one job and do it well
+pipes|tool to send the output of one command to become the input of the next command (written like this: "|")
 standard streams|the inputs (STDIN), ouptuts (STDOUT), and errors (STDERR) produced and used by commands
-directory|folder
+directory|just a "folder" from Windows speak
+
+##resources
+
+* [commandlinefu](http://www.commandlinefu.com/commands/browse)
+* [stackoverflow](http://stackoverflow.com/questions/tagged/bash)
+* [nixCraft](http://www.cyberciti.biz/)
+* [kmandla's blog](https://kmandla.wordpress.com/)
