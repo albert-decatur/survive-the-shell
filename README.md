@@ -14,7 +14,7 @@ You now know the essence of Bash.
 On a Debian Linux based system like Ubuntu, you can install a ton of awesome utils as simple as . . .
 
 ```bash
-sudo apt-get install curl axel lftp git-core imagemagick poppler-utils unrar unzip htop nmap parallel feh rsync vim gt5
+sudo apt-get install curl axel lftp git-core imagemagick poppler-utils dtrx p7zip-full unrar unzip htop nmap parallel feh rsync vim gt5
 ```
 
 In this example, you're asking the package manager apt to install a list of packages.  
